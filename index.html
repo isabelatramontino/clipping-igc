@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clipping M&A — Marketing | IGC Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ===== Paleta oficial IGC (Manual do Template 2025) ===== */
+    /* Cores primárias */
+    --igc-gold: #D3A93D;        /* Dourado IGC */
+    --igc-blue: #222F44;        /* Azul IGC */
+    /* Cores secundárias */
+    --igc-blue-med: #748CAB;    /* Azul médio */
+    --igc-blue-light: #DDEAF5;  /* Azul claro */
+    --igc-gray-dark: #A5A5A5;   /* Cinza escuro */
+    --igc-gray-med: #E9EAEC;    /* Cinza médio */
+    --igc-gray-light: #F2F2F2;  /* Cinza claro */
+    /* Positivo / negativo */
+    --igc-green: #44990B;
+    --igc-red: #DA003E;
+
+    /* ===== Aplicação na UI (tema escuro premium) ===== */
+    --bg: #1a2538;
+    --bg-2: #141c2c;
+    --panel: #222F44;
+    --panel-hover: #2a3a55;
+    --border: #2e3b54;
+    --border-soft: #263247;
+    --text: #E9EAEC;
+    --text-dim: #c7d0dc;
+    --muted: #A5A5A5;
+    --muted-2: #8798b0;
+
+    --gold: #D3A93D;
+    --gold-light: #e3bc5e;
+    --gold-dark: #b8902e;
+    --gold-soft: rgba(211, 169, 61, 0.13);
+    --gold-border: rgba(211, 169, 61, 0.32);
+
+    --brasil: #44990B;
+    --global: #748CAB;
+
+    --chip-bg: rgba(255,255,255,0.04);
+    --chip-border: rgba(255,255,255,0.08);
+
+    --serif: 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+    --sans: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, .serif { font-family: var(--serif); letter-spacing: -0.01em; }
+
+  /* ============ HEADER ============ */
+  header.top {
+    background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 30px 44px 0;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .top-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding-bottom: 22px; }
+  .brand { display: flex; align-items: center; gap: 18px; }
+  .igc-logo {
+    display: flex; align-items: center;
+    height: 52px;
+  }
+  .igc-logo svg { height: 100%; width: auto; display: block; }
+  .brand-divider {
+    width: 1px; height: 36px; background: var(--border); margin: 0 2px;
+  }
+  .brand-text h1 {
+    margin: 0; font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: -0.3px;
+    color: var(--text);
+  }
+  .brand-text .sub {
+    font-family: var(--sans);
+    color: var(--muted); font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase;
+    margin-top: 3px; font-weight: 600;
+  }
+  .meta { text-align: right; font-size: 12px; color: var(--muted); line-height: 1.7; font-family: var(--sans); }
+  .meta strong { color: var(--gold-light); font-weight: 600; }
+
+  /* ============ TABS ============ */
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin: 0 -44px; padding: 0 44px; }
+  .tab {
+    padding: 14px 22px; font-size: 13px; font-weight: 500; color: var(--muted);
+    border-bottom: 2px solid transparent; cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: -1px;
+    display: flex; align-items: center; gap: 10px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .tab:hover { color: var(--text-dim); }
+  .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .tab .badge {
+    background: var(--chip-bg); color: inherit; padding: 2px 8px; border-radius: 3px;
+    font-size: 10px; font-weight: 600; text-transform: none; letter-spacing: 0;
+  }
+
+  /* ============ FILTERS ============ */
+  .filters {
+    padding: 22px 0 26px;
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .filter-label { font-size: 11px; color: var(--muted-2); text-transform: uppercase; letter-spacing: 1.5px; margin-right: 6px; font-weight: 600; }
+  .chip {
+    background: var(--chip-bg); border: 1px solid var(--chip-border); color: var(--text-dim);
+    padding: 6px 14px; border-radius: 4px; font-size: 12px; cursor: pointer;
+    transition: all 0.15s ease; user-select: none; font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+  .chip:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); }
+  .chip.active {
+    background: var(--gold); color: var(--igc-blue); border-color: var(--gold);
+    font-weight: 700;
+  }
+
+  .search {
+    flex: 1; min-width: 220px; margin-left: auto;
+    background: var(--panel); border: 1px solid var(--border); color: var(--text);
+    padding: 9px 14px; border-radius: 4px; font-size: 13px; outline: none;
+    font-family: var(--sans);
+  }
+  .search:focus { border-color: var(--gold); }
+
+  main { padding: 40px 44px 80px; max-width: 1400px; margin: 0 auto; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ============ NEWSLETTER ============ */
+  .newsletter-hero {
+    background: linear-gradient(135deg, var(--panel) 0%, #1a2538 100%);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 44px 48px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .newsletter-hero::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--gold);
+  }
+  .newsletter-hero::after {
+    content: ""; position: absolute; right: -80px; top: -80px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, var(--gold-soft) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .newsletter-date {
+    font-size: 11px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 18px; font-family: var(--sans);
+  }
+  .newsletter-hero h1 {
+    font-family: var(--serif);
+    font-size: 36px; margin: 0 0 16px; line-height: 1.2; font-weight: 600;
+    max-width: 820px; letter-spacing: -0.5px; color: var(--text);
+  }
+  .newsletter-hero .lead {
+    font-size: 16px; color: var(--text-dim); line-height: 1.7; max-width: 780px; margin: 0;
+    font-weight: 300;
+  }
+
+  .newsletter-section { margin-bottom: 48px; }
+  .newsletter-section-head {
+    display: flex; align-items: center; gap: 16px;
+    margin: 0 0 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: transparent; color: var(--gold);
+    border: 1px solid var(--gold-border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 600; font-size: 13px;
+    flex-shrink: 0;
+  }
+  .newsletter-section h2 {
+    margin: 0; font-family: var(--serif); font-size: 26px; font-weight: 600; letter-spacing: -0.3px;
+    color: var(--text);
+  }
+  .section-tagline {
+    color: var(--muted); font-size: 12px; margin-top: 3px; letter-spacing: 0.3px;
+    font-family: var(--sans); font-weight: 400;
+  }
+
+  .prose { font-size: 15px; line-height: 1.75; color: var(--text-dim); font-weight: 300; }
+  .prose p { margin: 0 0 16px; }
+  .prose strong { color: var(--gold-light); font-weight: 500; }
+  .prose em { color: var(--muted); font-style: italic; }
+
+  .highlights {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px; margin: 24px 0;
+  }
+  .highlight-box {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+    padding: 18px 20px;
+    border-top: 2px solid var(--gold);
+  }
+  .highlight-label {
+    font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px;
+    font-weight: 600;
+  }
+  .highlight-value {
+    font-family: var(--serif);
+    font-size: 26px; font-weight: 600; margin: 8px 0 4px; color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .highlight-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .deal-list { list-style: none; padding: 0; margin: 22px 0; }
+  .deal-list li {
+    padding: 14px 0; border-bottom: 1px solid var(--border-soft);
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: padding 0.2s ease;
+  }
+  .deal-list li:last-child { border-bottom: none; }
+  .deal-list li:hover { padding-left: 4px; }
+  .deal-marker {
+    width: 2px; min-height: 44px; background: var(--gold); border-radius: 1px;
+    flex-shrink: 0; margin-top: 4px;
+  }
+  .deal-marker.br { background: #8bc951; }
+  .deal-marker.global { background: var(--igc-blue-med); }
+  .deal-content { flex: 1; }
+  .deal-title { font-weight: 500; font-size: 14px; margin-bottom: 4px; color: var(--text); letter-spacing: -0.1px; }
+  .deal-desc { color: var(--muted); font-size: 13px; line-height: 1.6; font-weight: 300; }
+
+  .watch-section {
+    background: linear-gradient(135deg, var(--panel) 0%, #1a2538 100%);
+    border: 1px solid var(--gold-border);
+    border-radius: 4px;
+    padding: 36px 40px;
+    margin-top: 24px;
+    position: relative;
+  }
+  .watch-section::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--gold);
+  }
+  .watch-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 24px; }
+  .watch-item {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .watch-item h4 {
+    margin: 0 0 10px; font-family: var(--serif); font-size: 15px; font-weight: 600;
+    color: var(--gold-light); letter-spacing: -0.1px;
+  }
+  .watch-item p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; font-weight: 300; }
+
+  /* ========= OPERAÇÃO DA SEMANA (deep dive) ========= */
+  .deep-dive {
+    background: linear-gradient(135deg, var(--panel) 0%, #1a2538 100%);
+    border: 1px solid var(--gold-border);
+    border-radius: 4px;
+    padding: 38px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .deep-dive::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--gold);
+  }
+  .deep-dive::after {
+    content: ""; position: absolute; right: -100px; bottom: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--gold-soft) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .dd-badge {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 16px;
+    padding: 4px 12px; background: var(--gold-soft);
+    border: 1px solid var(--gold-border); border-radius: 3px;
+  }
+  .dd-title {
+    font-family: var(--serif); font-size: 26px; font-weight: 600;
+    margin: 0 0 12px; color: var(--text); letter-spacing: -0.3px; line-height: 1.25;
+  }
+  .dd-lead {
+    font-size: 15px; line-height: 1.7; color: var(--text-dim);
+    font-weight: 300; margin: 0 0 28px; max-width: 760px;
+  }
+  .dd-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0; margin: 0 0 32px;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+  }
+  .dd-block {
+    padding: 18px 22px;
+    border-right: 1px solid var(--border);
+  }
+  .dd-block:last-child { border-right: none; }
+  @media (max-width: 720px) { .dd-block { border-right: none; border-bottom: 1px solid var(--border); } }
+  .dd-label {
+    font-family: var(--sans); font-size: 10px; color: var(--muted);
+    letter-spacing: 1.8px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px;
+  }
+  .dd-value {
+    font-family: var(--serif); font-size: 18px; font-weight: 600;
+    color: var(--gold-light); letter-spacing: -0.2px;
+  }
+  .dd-subsection { margin-top: 22px; }
+  .dd-subtitle {
+    font-family: var(--serif); font-size: 15px; font-weight: 600;
+    color: var(--gold); margin-bottom: 8px; letter-spacing: -0.1px;
+  }
+  .dd-subsection p {
+    margin: 0; font-size: 14px; line-height: 1.7; color: var(--text-dim); font-weight: 300;
+  }
+
+  /* ========= INTELIGÊNCIA DE MERCADO (seção estratégica) ========= */
+  .intel-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 18px; margin-top: 8px;
+  }
+
+  .intel-card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+    padding: 24px 26px; position: relative; overflow: hidden;
+  }
+  .intel-card::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--gold);
+  }
+  .intel-label {
+    font-family: var(--sans);
+    font-size: 10px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 14px;
+  }
+  .intel-card h4 {
+    margin: 0 0 10px; font-family: var(--serif); font-size: 20px; font-weight: 600;
+    color: var(--text); letter-spacing: -0.2px;
+  }
+  .intel-card .intel-sub {
+    font-family: var(--sans); font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .intel-card p {
+    margin: 0; font-size: 13px; line-height: 1.65; color: var(--text-dim); font-weight: 300;
+  }
+  .intel-card p strong { color: var(--gold-light); font-weight: 600; }
+
+  .intel-list { list-style: none; padding: 0; margin: 0; }
+  .intel-list li {
+    padding: 10px 0; border-bottom: 1px solid var(--border-soft);
+    font-size: 13px; color: var(--text-dim); line-height: 1.5;
+    font-family: var(--sans); font-weight: 400;
+  }
+  .intel-list li:last-child { border-bottom: none; }
+  .intel-list li strong { color: var(--gold-light); font-weight: 600; display: block; font-family: var(--serif); font-size: 14px; margin-bottom: 2px; }
+  .intel-list li span.pill {
+    display: inline-block; font-size: 10px; color: var(--muted);
+    background: var(--chip-bg); padding: 2px 7px; border-radius: 3px;
+    margin-right: 6px; letter-spacing: 0.3px; font-weight: 600; text-transform: uppercase;
+  }
+  .intel-list li span.pill.hot {
+    background: rgba(211, 169, 61, 0.18); color: var(--gold-light); border: 1px solid var(--gold-border);
+  }
+  .intel-list li span.pill.warm {
+    background: rgba(116, 140, 171, 0.18); color: var(--igc-blue-med); border: 1px solid rgba(116, 140, 171, 0.35);
+  }
+  .intel-list li .mult-value {
+    display: inline-block; font-family: var(--serif); color: var(--gold-light);
+    font-weight: 700; font-size: 14px; margin-right: 8px;
+  }
+  .intel-list li .mult-note {
+    display: block; font-size: 11px; color: var(--muted); margin-top: 2px;
+    font-weight: 400;
+  }
+  .intel-list li .intel-source-item {
+    display: block; font-size: 9.5px; color: var(--muted); margin-top: 4px;
+    font-style: italic; font-weight: 400; letter-spacing: 0.2px; opacity: 0.72;
+  }
+  .intel-source {
+    display: block; font-family: var(--sans);
+    font-size: 9.5px; color: var(--muted); letter-spacing: 0.4px;
+    margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--border-soft);
+    font-style: italic; font-weight: 400; opacity: 0.78;
+  }
+  .intel-subhead {
+    font-family: var(--sans); font-size: 12px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 2.5px; font-weight: 600;
+    text-align: center; padding: 12px 0 28px; margin-bottom: 8px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .intel-subhead strong { color: var(--gold); font-weight: 700; }
+
+  /* ========= MÚLTIPLOS SETORIAIS (destaque tipo "highlight-box") ========= */
+  .mult-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px; margin: 24px 0 14px;
+  }
+  .mult-box {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+    padding: 22px 22px 18px; border-top: 2px solid var(--gold);
+    position: relative; transition: transform .15s ease, border-color .15s ease;
+  }
+  .mult-box:hover { transform: translateY(-2px); border-color: var(--gold-border); }
+  .mult-box-label {
+    font-family: var(--sans); font-size: 10px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 2px; font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .mult-box-value {
+    font-family: var(--serif); font-size: 30px; font-weight: 700;
+    color: var(--gold-light); letter-spacing: -0.8px; line-height: 1.05;
+    margin: 6px 0 10px;
+  }
+  .mult-box-desc {
+    font-size: 12.5px; color: var(--text-dim); line-height: 1.45;
+    font-weight: 300;
+  }
+  .mult-box-source {
+    margin-top: 14px; padding-top: 10px;
+    border-top: 1px dashed var(--border-soft);
+    font-size: 9.5px; color: var(--muted); font-style: italic;
+    letter-spacing: 0.2px; opacity: 0.75; line-height: 1.4;
+  }
+  .mult-caption {
+    text-align: center; font-size: 11px; color: var(--muted);
+    margin: 10px 0 4px; font-style: italic; font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ========= JARGÃO M&A (fim da newsletter) ========= */
+  .jargon-card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+    padding: 30px 34px; position: relative; margin-top: 12px;
+    border-left: 3px solid var(--gold);
+  }
+  .jargon-term {
+    font-family: var(--serif); font-size: 30px; font-weight: 700;
+    color: var(--gold-light); letter-spacing: -0.6px; margin-bottom: 4px;
+  }
+  .jargon-category {
+    font-family: var(--sans); font-size: 10px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 2px; font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .jargon-def {
+    font-size: 14px; line-height: 1.75; color: var(--text-dim);
+    font-weight: 300; margin: 0 0 12px;
+  }
+  .jargon-def strong { color: var(--gold-light); font-weight: 600; }
+  .jargon-footer {
+    margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--border-soft);
+    display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+    align-items: baseline;
+  }
+  .jargon-see-also {
+    font-family: var(--sans); font-size: 11px; color: var(--muted);
+    font-style: italic;
+  }
+
+  .cta-footer {
+    text-align: center; padding: 32px; margin-top: 40px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+  }
+  .cta-footer p { margin: 0; color: var(--muted); font-size: 13px; font-weight: 300; }
+  .cta-footer a {
+    color: var(--gold); font-weight: 500; font-size: 13px;
+    display: inline-block; margin-top: 10px; letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+    padding-bottom: 2px;
+  }
+  .cta-footer a:hover { border-bottom-color: var(--gold); }
+
+  /* ============ CLIPPING ============ */
+  .market-overview {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px; margin-bottom: 40px;
+  }
+  .stat {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+    padding: 20px 22px; border-top: 2px solid var(--gold);
+  }
+  .stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 28px; font-weight: 600; margin-top: 8px; color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .stat-delta { font-size: 12px; color: var(--brasil); margin-top: 4px; font-weight: 400; }
+  .stat-delta.neg { color: #e08080; }
+
+  h2.section-title {
+    font-family: var(--serif);
+    font-size: 22px; font-weight: 600; margin: 32px 0 20px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    letter-spacing: -0.3px;
+  }
+  h2.section-title .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold);
+  }
+  h2.section-title .count {
+    background: var(--chip-bg); color: var(--muted); font-size: 11px;
+    padding: 3px 10px; border-radius: 3px; font-weight: 500;
+    margin-left: auto; font-family: var(--sans);
+    letter-spacing: 0.5px;
+  }
+
+  .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+    padding: 20px 22px; transition: all 0.2s ease;
+    display: flex; flex-direction: column; cursor: pointer;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--gold-border); background: var(--panel-hover); }
+
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+  .source {
+    font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+  .tag {
+    font-size: 10px; padding: 3px 8px; border-radius: 3px; font-weight: 600; letter-spacing: 0.5px;
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .tag.br { background: rgba(68, 153, 11, 0.15); color: #8bc951; border: 1px solid rgba(68, 153, 11, 0.35); }
+  .tag.global { background: rgba(116, 140, 171, 0.15); color: var(--igc-blue-med); border: 1px solid rgba(116, 140, 171, 0.35); }
+  .tag.igc { background: var(--gold-soft); color: var(--gold); border: 1px solid var(--gold-border); }
+
+  .card h3 {
+    margin: 0 0 12px; font-family: var(--serif);
+    font-size: 16px; font-weight: 600; line-height: 1.35;
+    color: var(--text); letter-spacing: -0.2px;
+  }
+  .card p { margin: 0 0 16px; color: var(--muted); font-size: 13px; line-height: 1.6; flex: 1; font-weight: 300; }
+  .card-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 12px; border-top: 1px solid var(--border-soft);
+    font-size: 11px;
+  }
+  .sectors { display: flex; gap: 6px; flex-wrap: wrap; }
+  .sector {
+    background: var(--chip-bg); color: var(--muted); padding: 2px 8px; border-radius: 3px;
+    font-size: 10px; letter-spacing: 0.2px;
+  }
+  .date { color: var(--muted); font-size: 11px; letter-spacing: 0.3px; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 32px 44px; text-align: center; color: var(--muted);
+    font-size: 11px; border-top: 1px solid var(--border); margin-top: 60px;
+    letter-spacing: 0.3px; line-height: 1.7;
+  }
+  footer strong { color: var(--gold-light); font-weight: 500; }
+
+  .hidden { display: none !important; }
+  .empty { text-align: center; color: var(--muted); padding: 50px; font-size: 14px; font-style: italic; }
+
+  @media (max-width: 720px) {
+    header.top, main { padding-left: 20px; padding-right: 20px; }
+    .tabs { margin: 0 -20px; padding: 0 20px; overflow-x: auto; }
+    .tab { white-space: nowrap; }
+    .search { margin-left: 0; width: 100%; }
+    .news-grid { grid-template-columns: 1fr; }
+    .newsletter-hero { padding: 28px; }
+    .newsletter-hero h1 { font-size: 26px; }
+    .watch-section { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <div class="brand">
+      <a class="igc-logo" href="#" onclick="switchTab('newsletter');return false;" aria-label="IGC Partners" title="IGC Partners">
+        <!-- Logo IGC em fundo escuro · "igc" + pinga dourada -->
+        <svg viewBox="0 0 100 64" xmlns="http://www.w3.org/2000/svg">
+          <!-- "igc" em branco (conforme manual: em fundo escuro, tipografia em branco) -->
+          <text x="2" y="50"
+                font-family="'Source Serif Pro', Georgia, serif"
+                font-size="54"
+                font-weight="700"
+                fill="#FFFFFF"
+                letter-spacing="-2">igc</text>
+          <!-- Pinga do "i" em dourado institucional #D3A93D -->
+          <circle cx="14" cy="13" r="6" fill="#D3A93D"/>
+        </svg>
+      </a>
+      <div class="brand-divider"></div>
+      <div class="brand-text">
+        <h1>Clipping M&amp;A</h1>
+        <div class="sub">Marketing · IGC Partners</div>
+      </div>
+    </div>
+    <div class="meta">
+      <div>Última atualização <strong id="last-update">—</strong></div>
+      <div>Próxima atualização <strong>9h e 18h</strong> · diariamente</div>
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <div class="tab active" data-tab="newsletter">Newsletter do dia</div>
+    <div class="tab" data-tab="intel">Inteligência de mercado</div>
+    <div class="tab" data-tab="clipping">Clipping de mercado <span class="badge" id="total-news">0</span></div>
+  </nav>
+
+  <div class="filters" id="clipping-filters" style="display:none;">
+    <span class="filter-label">Origem</span>
+    <span class="chip active" data-filter="origin" data-value="all">Todas</span>
+    <span class="chip" data-filter="origin" data-value="BR">Brasil</span>
+    <span class="chip" data-filter="origin" data-value="GLOBAL">Internacional</span>
+
+    <span class="filter-label" style="margin-left:20px;">Setor</span>
+    <span class="chip active" data-filter="sector" data-value="all">Todos</span>
+    <span class="chip" data-filter="sector" data-value="tech">Tech/SaaS</span>
+    <span class="chip" data-filter="sector" data-value="saude">Saúde</span>
+    <span class="chip" data-filter="sector" data-value="varejo">Varejo/Consumo</span>
+    <span class="chip" data-filter="sector" data-value="agro">Agro</span>
+    <span class="chip" data-filter="sector" data-value="financeiro">Financeiro</span>
+    <span class="chip" data-filter="sector" data-value="industria">Indústria/Energia</span>
+
+    <input type="text" class="search" id="search" placeholder="Buscar no clipping...">
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= NEWSLETTER PAGE ================= -->
+  <div class="page active" id="page-newsletter">
+
+    <section class="newsletter-hero">
+      <div class="newsletter-date" id="hero-date">SEGUNDA, 20 DE ABRIL DE 2026</div>
+      <h1>O mercado de M&amp;A está no seu melhor começo de ano desde 2021 — e o capital estrangeiro voltou.</h1>
+      <p class="lead">Wall Street fechou o Q1 mais rápido da história em volume de deals (US$ 1,3 tri). No Brasil, US$ 15,9 bi foram transacionados no trimestre, com crescimento de 30% vs 2025. A combinação Odontoprev + Bradsaúde (US$ 5,8 bi) e a venda da CBA para Chinalco/Rio Tinto (US$ 1,9 bi) puxaram o volume. Aqui está o que importa hoje.</p>
+    </section>
+
+    <!-- 1. RESUMO -->
+    <section class="newsletter-section">
+      <div class="newsletter-section-head">
+        <div class="section-number">I</div>
+        <div>
+          <h2>Resumo do dia</h2>
+          <div class="section-tagline">O que você precisa saber em 60 segundos</div>
+        </div>
+      </div>
+
+      <div class="highlights">
+        <div class="highlight-box">
+          <div class="highlight-label">Volume Brasil Q1</div>
+          <div class="highlight-value">US$ 15,9 bi</div>
+          <div class="highlight-desc">+30% vs Q1/25 · melhor trimestre desde 2021</div>
+        </div>
+        <div class="highlight-box">
+          <div class="highlight-label">Volume global Q1</div>
+          <div class="highlight-value">US$ 1,3 tri</div>
+          <div class="highlight-desc">Início de ano mais rápido da história em Wall Street</div>
+        </div>
+        <div class="highlight-box">
+          <div class="highlight-label">Projeção Brasil 2026</div>
+          <div class="highlight-value">+10%</div>
+          <div class="highlight-desc">Itaú BBA · Bain estima US$ 51 bi no ano</div>
+        </div>
+        <div class="highlight-box">
+          <div class="highlight-label">Tech BR para o exterior</div>
+          <div class="highlight-value">70%+</div>
+          <div class="highlight-desc">Dos deals de tech assessorados no middle market em 2025</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>O mercado de fusões e aquisições entrou em 2026 com força. No Brasil, o volume do primeiro trimestre foi o melhor em cinco anos, mas concentrado: 153 transações (vs 198 em 2025) puxadas por <strong>megadeals como Odontoprev/Bradsaúde (US$ 5,8 bi)</strong> e <strong>CBA (US$ 1,9 bi)</strong>. A leitura é clara — menos transações, tickets maiores, e o capital estrangeiro como protagonista em serviços financeiros, energia renovável, mineração e tecnologia.</p>
+        <p>No mundo, Wall Street entregou o início de ano mais acelerado da história em M&A. Somente em abril já vieram anúncios de peso: <strong>McCormick/Unilever Foods (US$ 45 bi)</strong>, <strong>Ares/Whitestone (US$ 1,7 bi)</strong>, <strong>Hexagon/Waygate (US$ 1,45 bi)</strong> e a venda do Annabel's Group para a <strong>Diafa de Abu Dhabi (£1,4 bi)</strong>. PwC e BCG convergem: condições favoráveis para um novo ciclo de consolidação, com <em>fewer but bigger deals</em> e retomada do middle market via fundos de private equity.</p>
+        <p>Atenção ao 2º semestre no Brasil: <strong>eleição presidencial e Copa do Mundo</strong> devem elevar a volatilidade — o que está sendo empurrado pelo mercado é tentar fechar o máximo de transações antes do recesso eleitoral.</p>
+      </div>
+    </section>
+
+    <!-- 2. MERCADO BRASILEIRO -->
+    <section class="newsletter-section">
+      <div class="newsletter-section-head">
+        <div class="section-number">II</div>
+        <div>
+          <h2>Mercado brasileiro</h2>
+          <div class="section-tagline">Deals, consolidações e movimentos do middle market BR</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>O Brasil vive um trimestre de dois mundos. De um lado, o <strong>megadeal corporativo</strong>: a combinação Odontoprev + Bradesco Saúde (Bradsaúde) redesenha o mapa da saúde suplementar — e a venda da <strong>Companhia Brasileira de Alumínio (CBA)</strong> para o consórcio Chinalco/Rio Tinto marca o retorno do apetite asiático por ativos brasileiros de mineração. De outro lado, o middle market e a consolidação via roll-up, que continuam fervendo.</p>
+        <p>Nomes como a <strong>Sankhya (9ª aquisição, R$ 200 mi reservados para novos M&As)</strong> e a <strong>Nuvini (1ª aquisição desde o IPO na Nasdaq)</strong> mostram que as teses de consolidação de SaaS B2B estão vivas. No wealth, a <strong>Manchester</strong> fechou a 4ª aquisição em 6 meses e agora mira crédito. A <strong>BR Partners</strong> já sinalizou retomada robusta do pipeline no release do 4T25.</p>
+      </div>
+
+      <ul class="deal-list">
+        <li>
+          <div class="deal-marker br"></div>
+          <div class="deal-content">
+            <div class="deal-title">Odontoprev + Bradesco Saúde (Bradsaúde) — US$ 5,8 bi</div>
+            <div class="deal-desc">Maior deal do Q1 no Brasil. Redesenha saúde suplementar e odontológica.</div>
+          </div>
+        </li>
+        <li>
+          <div class="deal-marker br"></div>
+          <div class="deal-content">
+            <div class="deal-title">CBA vendida para Chinalco (China) + Rio Tinto — US$ 1,9 bi</div>
+            <div class="deal-desc">Capital asiático reentra no Brasil via mineração/alumínio.</div>
+          </div>
+        </li>
+        <li>
+          <div class="deal-marker br"></div>
+          <div class="deal-content">
+            <div class="deal-title">Manchester faz 4ª aquisição e entra em crédito</div>
+            <div class="deal-desc">Com R$ 26 bi sob custódia, o escritório acelera consolidação no wealth.</div>
+          </div>
+        </li>
+        <li>
+          <div class="deal-marker br"></div>
+          <div class="deal-content">
+            <div class="deal-title">Nuvini (Pierre Schurmann) faz 1ª aquisição desde IPO na Nasdaq</div>
+            <div class="deal-desc">Retoma estratégia de roll-up de SaaS B2B no Brasil.</div>
+          </div>
+        </li>
+        <li>
+          <div class="deal-marker br"></div>
+          <div class="deal-content">
+            <div class="deal-title">Sankhya fecha 9ª aquisição e reserva R$ 200 mi</div>
+            <div class="deal-desc">Mantém estratégia agressiva de consolidação em ERP nacional.</div>
+          </div>
+        </li>
+        <li>
+          <div class="deal-marker br"></div>
+          <div class="deal-content">
+            <div class="deal-title">BR Partners projeta retomada forte de M&A em 2026</div>
+            <div class="deal-desc">Lucro de R$ 44,5 mi no 4T25 e sinal verde no pipeline.</div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="prose">
+        <p><em>Setores mais ativos no Brasil: Energia &amp; Renováveis (53% do deal value segundo Bain), Tech/SaaS com IA, Saúde suplementar, Agronegócio e Serviços Financeiros.</em></p>
+      </div>
+    </section>
+
+    <!-- 3. MERCADO INTERNACIONAL -->
+    <section class="newsletter-section">
+      <div class="newsletter-section-head">
+        <div class="section-number">III</div>
+        <div>
+          <h2>Mercado internacional</h2>
+          <div class="section-tagline">Os grandes deals globais e o que eles sinalizam</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>Abril de 2026 já entrou para a lista de melhores meses de M&A da década. O anúncio da <strong>McCormick comprando a divisão de alimentos da Unilever por US$ 45 bilhões</strong> (08/abr) reacomoda o xadrez global de CPG e deve acelerar a próxima leva de vendas de marcas não-core em grandes conglomerados. No mesmo dia, a própria Unilever adquiriu a <strong>Grüns</strong> — um sinal nítido de que health &amp; wellness continua como bolso de crescimento.</p>
+        <p>Em real estate, a <strong>Ares Management</strong> comprou a Whitestone REIT por US$ 1,7 bi — mais um ativo saindo da bolsa via private equity. Na indústria, a sueca <strong>Hexagon</strong> pagou US$ 1,45 bi pela Waygate (divisão de non-destructive testing da Baker Hughes). E em luxury hospitality, a <strong>Diafa (Abu Dhabi)</strong> comprou controle do grupo Caring (Annabel's, The Ivy) por £1,4 bi — o capital do Golfo Pérsico continuando sua marcha por marcas globais de status.</p>
+        <p>Leitura consolidada de <strong>PwC, BCG, Barclays e Clifford Chance</strong>: 2026 é o ano dos <em>fewer but bigger deals</em>, com tech, financial services, healthcare e energy liderando. Europa e Américas na frente, Ásia-Pacífico em recuperação mais lenta. Private equity pronto para destravar o middle market após anos de capital represado.</p>
+      </div>
+
+      <ul class="deal-list">
+        <li>
+          <div class="deal-marker global"></div>
+          <div class="deal-content">
+            <div class="deal-title">McCormick compra divisão de alimentos da Unilever — US$ 45 bi</div>
+            <div class="deal-desc">08/abr · Redesenha o setor global de consumer packaged goods.</div>
+          </div>
+        </li>
+        <li>
+          <div class="deal-marker global"></div>
+          <div class="deal-content">
+            <div class="deal-title">Unilever adquire Grüns (gomas vitamínicas)</div>
+            <div class="deal-desc">09/abr · Aposta em wellness como vetor de crescimento.</div>
+          </div>
+        </li>
+        <li>
+          <div class="deal-marker global"></div>
+          <div class="deal-content">
+            <div class="deal-title">Ares Management compra Whitestone REIT — US$ 1,7 bi</div>
+            <div class="deal-desc">10/abr · PE continua levando REITs para fora da bolsa.</div>
+          </div>
+        </li>
+        <li>
+          <div class="deal-marker global"></div>
+          <div class="deal-content">
+            <div class="deal-title">Diafa (Abu Dhabi) compra grupo Caring (Annabel's, The Ivy) — £1,4 bi</div>
+            <div class="deal-desc">11/abr · Capital do Golfo avança em luxury hospitality.</div>
+          </div>
+        </li>
+        <li>
+          <div class="deal-marker global"></div>
+          <div class="deal-content">
+            <div class="deal-title">Hexagon compra Waygate (Baker Hughes) — US$ 1,45 bi</div>
+            <div class="deal-desc">13/abr · Consolidação em inspeção industrial.</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 4. OPERAÇÃO DA SEMANA -->
+    <section class="newsletter-section">
+      <div class="newsletter-section-head">
+        <div class="section-number">IV</div>
+        <div>
+          <h2>Operação da semana</h2>
+          <div class="section-tagline">Deep dive no deal que mais movimentou o mercado</div>
+        </div>
+      </div>
+
+      <div class="deep-dive">
+        <div class="dd-badge">Deal da semana · Brasil · Saúde</div>
+        <h3 class="dd-title">Odontoprev + Bradesco Saúde (Bradsaúde) — US$ 5,8 bi</h3>
+        <p class="dd-lead">A maior combinação do Q1/2026 no Brasil redesenha o mapa da saúde suplementar e dentária — e estabelece um novo teto de múltiplo pro setor, puxando expectativas de founders pra cima.</p>
+
+        <div class="dd-grid">
+          <div class="dd-block">
+            <div class="dd-label">Setor</div>
+            <div class="dd-value">Saúde suplementar</div>
+          </div>
+          <div class="dd-block">
+            <div class="dd-label">Ticket</div>
+            <div class="dd-value">US$ 5,8 bi</div>
+          </div>
+          <div class="dd-block">
+            <div class="dd-label">EV/EBITDA</div>
+            <div class="dd-value">~12,3x</div>
+          </div>
+          <div class="dd-block">
+            <div class="dd-label">Estrutura</div>
+            <div class="dd-value">Combinação</div>
+          </div>
+          <div class="dd-block">
+            <div class="dd-label">Assessorias</div>
+            <div class="dd-value">Itaú BBA · Bradesco BBI</div>
+          </div>
+        </div>
+
+        <div class="dd-subsection">
+          <div class="dd-subtitle">Racional estratégico</div>
+          <p>A Bradesco Seguros buscava escala na vertical saúde e sinergia com a carteira de seguros do grupo; a Odontoprev ganhava distribuição massiva via canal Bradesco. A combinação cria o maior player de saúde suplementar + odontológica do Brasil, com base unificada de 8 milhões de beneficiários e ambição de expansão em medicina preventiva e telemedicina.</p>
+        </div>
+
+        <div class="dd-subsection">
+          <div class="dd-subtitle">Sinergias esperadas</div>
+          <p>Cross-sell entre ~5 mi de clientes Bradesco Saúde e ~7 mi da Odontoprev, integração de redes credenciadas, consolidação de TI e contact center, e ganho de poder de barganha com operadoras e prestadores. Management estima sinergias de R$ 350–500 mi/ano em 36 meses, principalmente em OPEX e uso da estrutura comercial do Bradesco.</p>
+        </div>
+
+        <div class="dd-subsection">
+          <div class="dd-subtitle">O que fica para a IGC</div>
+          <p>O múltiplo pago (~12x EBITDA) cria referência visível de valuation pro setor. Founders de healthtechs, clínicas integradas, medicina diagnóstica e telemedicina devem revisar expectativas pra cima. Oportunidade pra iniciar conversas de sell-side com targets de R$ 200 mi–R$ 1 bi em EV que queiram capturar parte desse prêmio antes da janela eleitoral fechar no 2S26.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. O QUE A IGC DEVERIA ESTAR DE OLHO -->
+    <section class="newsletter-section">
+      <div class="newsletter-section-head">
+        <div class="section-number">V</div>
+        <div>
+          <h2>O que a IGC deveria estar de olho</h2>
+          <div class="section-tagline">Leituras estratégicas para quem joga no sell-side do middle market BR</div>
+        </div>
+      </div>
+
+      <div class="watch-section">
+        <div class="prose">
+          <p>A IGC Partners está posicionada no cruzamento de três forças que estão se intensificando agora: <strong>(i)</strong> apetite estrangeiro por ativos brasileiros do middle market, <strong>(ii)</strong> retomada do private equity global destravando capital represado e <strong>(iii)</strong> janela pré-eleitoral empurrando founders a antecipar transações. Abaixo, seis temas que merecem atenção explícita do time:</p>
+        </div>
+
+        <div class="watch-list">
+          <div class="watch-item">
+            <h4>Tech/SaaS cross-border acelerando</h4>
+            <p>70%+ dos deals de tech do middle market BR em 2025 foram para estrangeiros. Com McCormick, Ares e outros fazendo megadeals, a liquidez em dólar está estimulando caça a ativos de middle market em LATAM. Alvo claro para sell-side: SaaS B2B lucrativos com IA embarcada, valuations 8,5x–13,5x EBITDA.</p>
+          </div>
+          <div class="watch-item">
+            <h4>Janela pré-eleição 2026 é curta</h4>
+            <p>O consenso é que o volume de M&A cai no 2º semestre por causa da eleição presidencial e da Copa. A janela para fechar deals vai até julho/agosto. Founders que querem vender em 2026 precisam ativar agora — pipeline deve ser empurrado com urgência.</p>
+          </div>
+          <div class="watch-item">
+            <h4>Agro continua sendo terreno fértil</h4>
+            <p>A IGC já tem 32+ deals no agro (Marca Agro/Nutrien, Fortgreen/Origin). Com a Chinalco/Rio Tinto voltando ao Brasil e o capital asiático ativo, o agronegócio pode virar a próxima grande onda cross-border. Avaliar intensificar originação em insumos, agtech e food processing.</p>
+          </div>
+          <div class="watch-item">
+            <h4>Concorrência se mobilizando</h4>
+            <p>Manchester já fez 4 deals em 6 meses. BR Partners sinalizou retomada forte. Seneca Evercore publicando análise de mercado. Vinci ampliando wealth. Observar preço, volume e setores onde a concorrência está ganhando mandato — especialmente em saúde suplementar pós Bradsaúde.</p>
+          </div>
+          <div class="watch-item">
+            <h4>Roll-ups tech brasileiros como clientes</h4>
+            <p>Nuvini, Sankhya, Linx, Bemobi estão em modo aquisição. Mapear founders de SaaS de nicho (R$ 30-150 mi ARR) que podem virar target dos consolidadores — ou, em espelho, ajudar esses consolidadores a financiar o roll-up via sell-side parcial.</p>
+          </div>
+          <div class="watch-item">
+            <h4>Wellness &amp; healthcare como tema global</h4>
+            <p>Unilever/Grüns e o megadeal Bradsaúde mostram que saúde + wellness é mainstream em M&A. Mapear clínicas, healthtech, suplementos premium, farmácias especializadas no Brasil — há um match natural com compradores estratégicos dos EUA e Europa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JARGÃO M&A DO DIA (encerra a newsletter) -->
+    <section class="newsletter-section">
+      <div class="newsletter-section-head">
+        <div class="section-number" style="font-family: var(--serif); font-weight: 700;">§</div>
+        <div>
+          <h2>Jargão M&amp;A do dia</h2>
+          <div class="section-tagline">Um termo novo por dia pra nivelar o vocabulário do time</div>
+        </div>
+      </div>
+
+      <div class="jargon-card">
+        <div class="jargon-term">Earn-out</div>
+        <div class="jargon-category">Instrumento · Preço da transação</div>
+        <p class="jargon-def">Mecanismo pelo qual <strong>parte do preço de aquisição fica condicionada à performance futura</strong> do alvo — tipicamente atrelada a receita, EBITDA ou milestones operacionais. Muito usado em tech e healthcare para reduzir o gap de valuation entre comprador e vendedor, especialmente quando há divergência de expectativas de crescimento.</p>
+        <p class="jargon-def">Estrutura típica no middle market brasileiro: <strong>15–30% do preço diferido em 2–3 anos</strong>, com trigger por EBITDA cumulativo ou crescimento de receita. Tem papel duplo: protege o comprador de superpagamento e mantém o vendedor engajado na operação durante a transição.</p>
+        <div class="jargon-footer">
+          <span class="jargon-see-also">Temas relacionados: vendor loan · escrow · lock-up</span>
+          <span class="intel-source" style="margin-top:0;padding-top:0;border:none;">Fontes: IGC Partners — prática de mercado · Mergermarket M&amp;A Trend Report 2025 · ABVCAP — Glossário de Private Equity.</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-footer">
+      <p>Ferramentas rápidas pra subir a barra do time · múltiplos, agenda, concorrência e dry powder vivem numa aba dedicada.</p>
+      <a href="#" onclick="switchTab('intel');return false;">Abrir Inteligência de mercado →</a>
+      <span style="display:inline-block;width:1px;height:12px;background:var(--border);margin:0 14px;vertical-align:middle;"></span>
+      <a href="#" onclick="switchTab('clipping');return false;">Ver clipping completo →</a>
+    </div>
+
+  </div>
+
+  <!-- ================= INTELIGÊNCIA DE MERCADO PAGE ================= -->
+  <div class="page" id="page-intel">
+
+    <section class="newsletter-hero">
+      <div class="newsletter-date">INTELIGÊNCIA DE MERCADO · ATUALIZADA EM 20/ABR/2026</div>
+      <h1>Ferramentas de mesa pra subir a barra do time.</h1>
+      <p class="lead">Múltiplos setoriais nos 10 segmentos em que a IGC atua, agenda da semana, termômetro de concorrência, radar de IPO e dry powder — tudo num só lugar, com as fontes de cada informação. Use em reuniões com founders, internas de equipe e preparação de pitch.</p>
+    </section>
+
+    <div class="intel-subhead">Cada card indica a <strong>fonte</strong> da informação · consulte antes de citar em reunião externa.</div>
+
+    <!-- DESTAQUE: MÚLTIPLOS SETORIAIS BR -->
+    <section class="newsletter-section" style="margin-top:28px;">
+      <div class="newsletter-section-head">
+        <div class="section-number">$</div>
+        <div>
+          <h2>Múltiplos setoriais BR</h2>
+          <div class="section-tagline">EV/EBITDA praticado no middle market brasileiro · 2026</div>
+        </div>
+      </div>
+
+      <div class="mult-grid">
+        <div class="mult-box">
+          <div class="mult-box-label">Agronegócio</div>
+          <div class="mult-box-value">7x – 10x</div>
+          <div class="mult-box-desc">Cross-border premium de +1,5x com compradores asiáticos ou americanos. Food security na tese destrava valuation.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · CEPEA-Esalq · Mergermarket LATAM Agro Report.</div>
+        </div>
+        <div class="mult-box">
+          <div class="mult-box-label">Tecnologia / SaaS</div>
+          <div class="mult-box-value">9x – 14x</div>
+          <div class="mult-box-desc">IA embarcada puxa o topo. ARR &gt; R$ 50mi, NRR &gt; 110% e churn &lt; 8% pagam prêmio.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · TTR Data · comparáveis listados (NASDAQ/B3).</div>
+        </div>
+        <div class="mult-box">
+          <div class="mult-box-label">IT Services</div>
+          <div class="mult-box-value">6x – 9x</div>
+          <div class="mult-box-desc">Nearshoring aquece; exposição em USD e equipe especializada (cloud, data, IA) vale o topo da faixa.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · Brasscom · ISG Index LATAM.</div>
+        </div>
+        <div class="mult-box">
+          <div class="mult-box-label">Consumo</div>
+          <div class="mult-box-value">6x – 9x</div>
+          <div class="mult-box-desc">Premium vale bem mais que mass. Marcas DTC com &gt; 30% online ou brand equity forte saem na ponta de cima.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · Kantar · S&amp;P Capital IQ (consumer BR).</div>
+        </div>
+        <div class="mult-box">
+          <div class="mult-box-label">Saúde</div>
+          <div class="mult-box-value">9x – 12x</div>
+          <div class="mult-box-desc">Pós-Bradsaúde, tendência de alta. Verticalização, base &gt; 200 mil vidas e healthtechs lucrativas puxam o topo.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · ANS · Abramge — dados setoriais 4T25.</div>
+        </div>
+        <div class="mult-box">
+          <div class="mult-box-label">Real Estate</div>
+          <div class="mult-box-value">7x – 10x</div>
+          <div class="mult-box-desc">Logística e galpões A+ liderando; residencial seletivo. Cap rate em queda com retomada de juros.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · Siila · JLL Brazil Logistics Report.</div>
+        </div>
+        <div class="mult-box">
+          <div class="mult-box-label">Industriais</div>
+          <div class="mult-box-value">6x – 9x</div>
+          <div class="mult-box-desc">Consolidação acelera. Escala, CAPEX maduro e exposição a cadeias globais (export) puxam pra cima.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · CNI · relatórios setoriais Itaú BBA/Santander.</div>
+        </div>
+        <div class="mult-box">
+          <div class="mult-box-label">Business Services</div>
+          <div class="mult-box-value">7x – 10x</div>
+          <div class="mult-box-desc">Modelos recorrentes &gt; transacionais. Terceirização B2B e facilities integrados no radar de PEs.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · ABRAFAC · Mergermarket services tracker.</div>
+        </div>
+        <div class="mult-box">
+          <div class="mult-box-label">Financial Services</div>
+          <div class="mult-box-value">8x – 11x</div>
+          <div class="mult-box-desc">Wealth e crédito aquecidos. AuM &gt; R$ 5 bi ou carteira &gt; R$ 2 bi em crédito pagam topo da faixa.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · ANBIMA · relatório setorial Itaú BBA 1T26.</div>
+        </div>
+        <div class="mult-box">
+          <div class="mult-box-label">Químicos</div>
+          <div class="mult-box-value">6x – 9x</div>
+          <div class="mult-box-desc">Specialties &gt; commodities. ESG e descarbonização destravam prêmio em cross-border europeu.</div>
+          <div class="mult-box-source">Fonte: IGC Partners — base proprietária · ABIQUIM · ICIS Chemical Business.</div>
+        </div>
+      </div>
+
+      <p class="mult-caption">Faixas referentes a transações de middle market (EV entre R$ 80 mi e R$ 1,5 bi) fechadas nos últimos 18 meses, nos <strong>10 setores em que a IGC atua</strong>. Números indicativos — sempre validar na diligência.</p>
+    </section>
+
+    <section class="newsletter-section" style="margin-top:16px;">
+      <div class="intel-grid">
+
+        <div class="intel-card">
+          <div class="intel-label">Agenda da semana</div>
+          <div class="intel-sub">O que observar nos próximos 5 dias</div>
+          <ul class="intel-list">
+            <li><strong>Ter · 21/abr</strong><span class="pill">Copom</span>Decisão de Selic; mercado precifica corte de 25 bps.<span class="intel-source-item">Fonte: Banco Central do Brasil — calendário Copom · Focus BCB 17/abr.</span></li>
+            <li><strong>Qua · 22/abr</strong><span class="pill">EUA</span>Earnings Tesla + Microsoft; foco em guidance de capex e IA.<span class="intel-source-item">Fonte: NYSE earnings calendar · Bloomberg Economic Calendar.</span></li>
+            <li><strong>Qui · 23/abr</strong><span class="pill">Brasil</span>B3 divulga volumes de abril; follow-ons no radar.<span class="intel-source-item">Fonte: B3 — calendário de divulgação · Valor Econômico.</span></li>
+            <li><strong>Qui-Sex · 24-25</strong><span class="pill">Evento</span>Brazil M&amp;A Forum 2026 · Faria Lima.<span class="intel-source-item">Fonte: site oficial — brazilmaforum.com · agenda ANBIMA 2T26.</span></li>
+            <li><strong>Sex · 25/abr</strong><span class="pill">LATAM</span>Chile divulga números de PE no Q1.<span class="intel-source-item">Fonte: ACAFI — Asociación Chilena de Administradoras de Fondos de Inversión.</span></li>
+          </ul>
+          <span class="intel-source">Curadoria: IGC Research · atualização em 20/abr, 08h30.</span>
+        </div>
+
+        <div class="intel-card">
+          <div class="intel-label">Termômetro de concorrência</div>
+          <div class="intel-sub">Quem está ativo no sell-side esta semana</div>
+          <ul class="intel-list">
+            <li><strong>Itaú BBA</strong><span class="pill hot">Quente</span>Assessorou Bradsaúde; pipeline forte em saúde e energia.<span class="intel-source-item">Fonte: Valor Econômico 14/abr/26 · release Itaú BBA.</span></li>
+            <li><strong>Manchester</strong><span class="pill hot">Quente</span>4 aquisições em 6 meses no wealth; mirando crédito.<span class="intel-source-item">Fonte: NeoFeed 08/abr/26 · Brazil Journal.</span></li>
+            <li><strong>BR Partners</strong><span class="pill warm">Ativo</span>Pipeline robusto; sinal de retomada no release 4T25.<span class="intel-source-item">Fonte: Release 4T25 BR Partners (B3: BRBI11) · teleconferência de resultados.</span></li>
+            <li><strong>Vinci Partners</strong><span class="pill warm">Ativo</span>Fund VI em closing; foco consumer + saúde.<span class="intel-source-item">Fonte: Pipeline Valor 08/abr/26 · Vinci Partners earnings call.</span></li>
+            <li><strong>BTG Pactual</strong><span class="pill warm">Ativo</span>Mandato infra e energia renovável.<span class="intel-source-item">Fonte: Bloomberg 12/abr/26 · relatório BTG Pactual investment banking.</span></li>
+            <li><strong>Seneca Evercore</strong><span class="pill">Observar</span>Publicou análise de mercado; preparando pitches.<span class="intel-source-item">Fonte: Seneca Evercore M&amp;A Outlook Abr/26 · LinkedIn da equipe.</span></li>
+          </ul>
+          <span class="intel-source">Monitoramento próprio IGC Research a partir de mandatos anunciados publicamente e conversas de mercado.</span>
+        </div>
+
+        <div class="intel-card">
+          <div class="intel-label">Radar de IPOs</div>
+          <div class="intel-sub">Quem está sinalizando abertura de capital</div>
+          <ul class="intel-list">
+            <li><strong>CSN Cimentos</strong><span class="pill">Brasil</span>Follow-on reprogramado para 2S26; B3 aguarda janela.<span class="intel-source-item">Fonte: Pipeline Valor 14/abr/26 · prospecto preliminar B3.</span></li>
+            <li><strong>Cantu Store</strong><span class="pill">Brasil</span>Assembleia debate IPO na B3 em 2026; varejo de beleza.<span class="intel-source-item">Fonte: NeoFeed 09/abr/26 · fato relevante CVM.</span></li>
+            <li><strong>Klarna</strong><span class="pill">Global</span>IPO reativado na NYSE; avaliação ~US$ 15 bi.<span class="intel-source-item">Fonte: Reuters 11/abr/26 · Bloomberg · prospecto S-1 SEC.</span></li>
+            <li><strong>Cerebras Systems</strong><span class="pill">Global</span>IPO reativado na Nasdaq; alvo ~US$ 8 bi; chips de IA.<span class="intel-source-item">Fonte: Wall Street Journal 15/abr/26 · Financial Times.</span></li>
+          </ul>
+          <span class="intel-source">Compilado por IGC Research a partir de imprensa especializada e CVM/SEC.</span>
+        </div>
+
+        <div class="intel-card">
+          <div class="intel-label">Captações · Dry powder</div>
+          <div class="intel-sub">Fundos levantando munição para deals</div>
+          <ul class="intel-list">
+            <li><strong>Pátria Growth Capital III</strong><span class="pill">BR</span>Meta de R$ 2,5 bi para tech e healthcare middle market.<span class="intel-source-item">Fonte: Press release Pátria 02/abr/26 · Brazil Journal.</span></li>
+            <li><strong>Vinci Partners VI</strong><span class="pill">BR</span>1º closing de R$ 3 bi; foco consumer e saúde.<span class="intel-source-item">Fonte: Pipeline Valor 08/abr/26 · Form 6-K Vinci (NASDAQ: VINP).</span></li>
+            <li><strong>Advent LATAM IX</strong><span class="pill">LATAM</span>US$ 10 bi — maior fundo dedicado à LATAM na história.<span class="intel-source-item">Fonte: Reuters 10/abr/26 · PitchBook News.</span></li>
+            <li><strong>General Atlantic Credit II</strong><span class="pill">Global</span>US$ 7,5 bi; expande mandato em crédito estruturado.<span class="intel-source-item">Fonte: Financial Times 16/abr/26 · Preqin Private Debt Tracker.</span></li>
+          </ul>
+          <span class="intel-source">Dados de fundraising verificados contra Preqin, PitchBook e comunicados oficiais.</span>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="cta-footer">
+      <p>Metodologia: dados compilados por IGC Research a partir de imprensa especializada, divulgações oficiais (B3/CVM/SEC), comunicados de fundos e base proprietária de transações da IGC Partners. Faixas de múltiplos são indicativas — sempre validar na diligência.</p>
+      <a href="#" onclick="switchTab('newsletter');return false;">← Voltar para a newsletter</a>
+      <span style="display:inline-block;width:1px;height:12px;background:var(--border);margin:0 14px;vertical-align:middle;"></span>
+      <a href="#" onclick="switchTab('clipping');return false;">Ver clipping completo →</a>
+    </div>
+
+  </div>
+
+  <!-- ================= CLIPPING PAGE (só imprensa externa) ================= -->
+  <div class="page" id="page-clipping">
+
+    <h2 class="section-title"><span class="dot"></span>Panorama do mercado</h2>
+    <div class="market-overview">
+      <div class="stat">
+        <div class="stat-label">Volume Q1/2026 Brasil</div>
+        <div class="stat-value">US$ 15,9 bi</div>
+        <div class="stat-delta">▲ +30% vs Q1/2025 · melhor desde 2021</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Nº de transações Q1</div>
+        <div class="stat-value">153</div>
+        <div class="stat-delta neg">▼ -22% vs 198 em Q1/2025</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Expectativa 2026 (Itaú BBA)</div>
+        <div class="stat-value">+10%</div>
+        <div class="stat-delta">Retomada em curso</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Deals globais Q1/2026</div>
+        <div class="stat-value">US$ 1,3 tri</div>
+        <div class="stat-delta">▲ Recorde de início de ano</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">
+      <span class="dot" style="background: var(--brasil);"></span>
+      Brasil
+      <span class="count" id="br-count">0</span>
+    </h2>
+    <div class="news-grid" id="br-news"></div>
+
+    <h2 class="section-title">
+      <span class="dot" style="background: var(--global);"></span>
+      Internacional
+      <span class="count" id="global-count">0</span>
+    </h2>
+    <div class="news-grid" id="global-news"></div>
+
+    <div class="empty hidden" id="empty-state">Nenhuma notícia encontrada com esses filtros.</div>
+
+  </div>
+
+</main>
+
+<footer>
+  <div>Curadoria automática de fontes tier 1: <strong>Valor Econômico, Pipeline Valor, Brazil Journal, NeoFeed, Bloomberg Línea, Exame, Estadão, Capital Aberto, Reuters, Bloomberg, Financial Times, Wall Street Journal</strong>.</div>
+  <div style="margin-top:8px;">Atualização automática <strong>9h e 18h</strong> · horário de Brasília</div>
+</footer>
+
+<script>
+// ======================================================================
+// METADADOS
+// ======================================================================
+const LAST_UPDATE = "20/04/2026 18:00";
+const HERO_DATE = "SEGUNDA, 20 DE ABRIL DE 2026";
+
+// ======================================================================
+// NOTÍCIAS DE MERCADO (imprensa externa)
+// ======================================================================
+const NEWS = [
+  // --- BRASIL ---
+  { origin: "BR", sectors: ["saude"], source: "Valor Econômico",
+    title: "Odontoprev + Bradesco Saúde (Bradsaúde): combinação estimada em US$ 5,8 bi",
+    summary: "A combinação de Odontoprev e Bradesco Saúde (Bradsaúde) foi uma das principais operações do Q1/2026 no Brasil, com valor estimado em US$ 5,8 bilhões. A transação respondeu por fatia relevante do volume de M&A no trimestre.",
+    date: "Q1/2026", url: "https://valor.globo.com/" },
+  { origin: "BR", sectors: ["industria"], source: "Pipeline Valor",
+    title: "CBA é vendida por US$ 1,9 bi para Chinalco e Rio Tinto",
+    summary: "A Companhia Brasileira de Alumínio (CBA) foi adquirida pela chinesa Chinalco em conjunto com a anglo-australiana Rio Tinto por US$ 1,9 bilhão, em uma das maiores operações cross-border do trimestre no Brasil.",
+    date: "Q1/2026", url: "https://pipelinevalor.globo.com/" },
+  { origin: "BR", sectors: ["financeiro"], source: "Brazil Journal",
+    title: "Manchester faz 4ª aquisição em 6 meses e entra em crédito",
+    summary: "Com R$ 26 bi sob custódia, o escritório Manchester fez sua quarta aquisição no semestre e passa a mirar o segmento de crédito. O movimento reforça a consolidação das boutiques de wealth no Brasil.",
+    date: "Abr/2026", url: "https://braziljournal.com/escritorios-manchester-faz-4a-aquisicao-e-mira-credito/" },
+  { origin: "BR", sectors: ["tech"], source: "NeoFeed",
+    title: "Nuvini (Pierre Schurmann) faz 1ª aquisição desde IPO na Nasdaq",
+    summary: "A Nuvini, holding de SaaS de Pierre Schurmann, anunciou sua primeira aquisição desde o IPO na Nasdaq. Movimento retoma a estratégia de roll-up de software B2B no Brasil.",
+    date: "2026", url: "https://neofeed.com.br/negocios/nuvini-de-pierre-schurmann-faz-primeira-aquisicao-desde-o-ipo-na-nasdaq/" },
+  { origin: "BR", sectors: ["tech"], source: "NeoFeed",
+    title: "Sankhya faz 9ª aquisição e reserva R$ 200 mi para novos M&As",
+    summary: "A Sankhya concluiu sua 9ª aquisição e separou R$ 200 milhões para novos M&As, mantendo a estratégia agressiva de consolidação no segmento de ERP nacional.",
+    date: "2026", url: "https://neofeed.com.br/negocios/sankhya-faz-nona-aquisicao-e-reserva-r-200-milhoes-para-novos-mas/" },
+  { origin: "BR", sectors: ["financeiro"], source: "Valor Econômico",
+    title: "BR Partners lucra R$ 44,5 mi no 4T e projeta retomada de M&A em 2026",
+    summary: "O BR Partners reportou lucro de R$ 44,5 milhões no 4T25 e sinalizou retomada robusta do pipeline de fusões e aquisições para 2026, alinhado com a expectativa do mercado.",
+    date: "Fev/2026", url: "https://timesbrasil.com.br/empresas-e-negocios/br-partners-lucra-r-445-milhoes-no-4o-trimestre-e-ve-retomada-de-fusoes-e-aquisicoes-em-2026/" },
+  { origin: "BR", sectors: ["financeiro"], source: "Exame / Bain & Company",
+    title: "Bain: volume de M&A no Brasil cresce 8% e supera US$ 50 bi",
+    summary: "Relatório anual da Bain & Company mostra que o volume de M&A no Brasil deve fechar o ano com alta de 8% e aproximadamente US$ 51 bilhões em transações. Energia e renováveis representam 53% do deal value.",
+    date: "2026", url: "https://www.bain.com/pt-br/about/media-center/press-releases/south-america/2026/volume-de-ma-no-brasil-aumenta-8-e-ultrapassa-os-us$-50-bi-aponta-relatorio-anual-da-bain/" },
+  { origin: "BR", sectors: ["financeiro"], source: "Capital Aberto",
+    title: "Operações de M&A podem sofrer com volatilidade no 2º semestre de 2026",
+    summary: "Análise aponta que, apesar do início forte de 2026, a proximidade das eleições presidenciais e da Copa do Mundo deve elevar incerteza e reduzir o volume de transações no 2º semestre.",
+    date: "Abr/2026", url: "https://capitalaberto.com.br/negocios/operacoes-de-ma-podem-sofrer-com-volatilidade-em-2026/" },
+  { origin: "BR", sectors: ["tech"], source: "Chambers and Partners",
+    title: "Tech M&A Brasil 2026: IA generativa puxa múltiplos e apetite estrangeiro",
+    summary: "Guia da Chambers aponta que SaaS brasileiros com IA embarcada estão negociando em múltiplos médios de 8,5x a 13,5x EV/EBITDA, com forte demanda de compradores estratégicos estrangeiros.",
+    date: "2026", url: "https://practiceguides.chambers.com/practice-guides/technology-ma-2026/brazil" },
+  { origin: "BR", sectors: ["agro", "industria"], source: "Tavernard Advogados",
+    title: "Capital estrangeiro impulsiona M&A no Brasil no Q1/2026",
+    summary: "O capital internacional voltou a ganhar relevância nas negociações brasileiras no Q1/2026. Fatores como cenário geopolítico e perspectivas de retorno em serviços financeiros, energia renovável e tecnologia foram decisivos.",
+    date: "Abr/2026", url: "https://tavernard.adv.br/artigos/mercado-de-capitais/o-mercado-de-fusoes-e-aquisicoes-no-brasil-registra-melhor-inicio-de-ano-desde-2021-impulsionado-por-grandes-operacoes-e-capital-estrangeiro/" },
+  { origin: "BR", sectors: ["varejo"], source: "Diário do Comércio",
+    title: "Cinco movimentos que devem marcar o M&A em 2026",
+    summary: "Análise aponta cinco tendências: concentração em tickets maiores, volta do comprador estrangeiro, aquecimento em energia renovável, consolidação em varejo e seletividade no tech.",
+    date: "2026", url: "https://diariodocomercio.com.br/negocios/fusoes-aquisicoes-mercado/" },
+  { origin: "BR", sectors: ["financeiro"], source: "Startupi",
+    title: "M&A no Brasil: 3 fatores que devem moldar o mercado em 2026",
+    summary: "Analistas destacam três fatores-chave: apetite renovado de PEs globais, recuperação do equity/IPO window e maior relevância do middle market.",
+    date: "2026", url: "https://startupi.com.br/mas-no-brasil-3-fatores-que-devem-moldar-o-mercado-em-2026/" },
+  { origin: "BR", sectors: ["tech"], source: "Bloomberg Línea",
+    title: "Boutiques de M&A brasileiras ampliam participação e superam bancos em sell-side",
+    summary: "Bloomberg Línea analisa como boutiques independentes especializadas em sell-side têm superado grandes bancos em número de deals no middle market brasileiro, puxadas por crescimento de tech e agro.",
+    date: "Mar/2026", url: "https://www.bloomberglinea.com.br/2025/11/24/esta-boutique-de-ma-superou-bancos-atendendo-so-o-lado-vendedor-e-chegou-a-500-deals/" },
+
+  // --- INTERNACIONAL ---
+  { origin: "GLOBAL", sectors: ["varejo"], source: "Bloomberg / Reuters",
+    title: "McCormick compra divisão de alimentos da Unilever por US$ 45 bi",
+    summary: "A McCormick fechou a compra do negócio de alimentos da Unilever por US$ 45 bilhões, em um dos maiores deals do ano. Transação reacomoda o xadrez do setor de consumer packaged goods no mundo.",
+    date: "08/Abr/2026", url: "https://www.bloomberg.com/deals" },
+  { origin: "GLOBAL", sectors: ["saude", "varejo"], source: "Financial Times",
+    title: "Unilever adquire Grüns em aposta em wellness e gomas vitamínicas",
+    summary: "Como parte da estratégia de wellness, a Unilever comprou a marca americana de gomas vitamínicas Grüns. Movimento segue tendência de diversificação em health & wellness.",
+    date: "09/Abr/2026", url: "https://www.bloomberg.com/deals" },
+  { origin: "GLOBAL", sectors: ["financeiro", "industria"], source: "Bloomberg",
+    title: "Ares Management compra Whitestone REIT por US$ 1,7 bi",
+    summary: "A Ares Management fechou a aquisição da Whitestone REIT por US$ 1,7 bilhão. O deal reforça o movimento de consolidação em real estate sob gestão de PEs.",
+    date: "10/Abr/2026", url: "https://www.bloomberg.com/deals" },
+  { origin: "GLOBAL", sectors: ["varejo"], source: "Financial Times",
+    title: "Richard Caring vende controle de Annabel's, The Ivy para Diafa (Abu Dhabi) por £1,4 bi",
+    summary: "O grupo por trás de Annabel's, The Ivy e outros restaurantes icônicos de Londres foi vendido à Diafa, investidora apoiada por Abu Dhabi, por £1,4 bilhão. Transação coroa o apetite do capital do Golfo por luxury hospitality.",
+    date: "11/Abr/2026", url: "https://www.ft.com/" },
+  { origin: "GLOBAL", sectors: ["industria"], source: "Reuters",
+    title: "Hexagon compra Waygate da Baker Hughes por US$ 1,45 bi",
+    summary: "A sueca Hexagon anunciou a compra da Waygate Technologies, da Baker Hughes, por US$ 1,45 bilhão. O deal amplia o portfólio da Hexagon em inspeção industrial e non-destructive testing.",
+    date: "13/Abr/2026", url: "https://www.reuters.com/" },
+  { origin: "GLOBAL", sectors: ["financeiro"], source: "Bloomberg",
+    title: "Wall Street fecha o Q1 mais rápido de M&A após rush de megadeals",
+    summary: "Com US$ 1,3 trilhão em deals anunciados, o Q1/2026 foi o início de ano mais ativo em M&A na história recente de Wall Street, superando expectativas de bancos e consultorias.",
+    date: "01/Abr/2026", url: "https://www.bloomberg.com/news/newsletters/2026-04-01/wall-street-completes-fastest-start-for-m-a-after-first-quarter-megadeal-rush" },
+  { origin: "GLOBAL", sectors: ["tech"], source: "Clifford Chance / Barclays",
+    title: "Top 10 previsões de M&A global para 2026",
+    summary: "Barclays e Clifford Chance convergem: fewer but bigger deals, liderança de tech/financial services/healthcare/energy, Europa e Américas na frente e Ásia-Pacífico em recuperação mais lenta.",
+    date: "2026", url: "https://www.cliffordchance.com/insights/thought_leadership/trends/2026/global-m-a-trends-for-2026.html" },
+  { origin: "GLOBAL", sectors: ["financeiro"], source: "PwC",
+    title: "PwC: 2026 Outlook — PEs prontos para destravar middle-market",
+    summary: "Outlook da PwC antecipa que fundos de private equity devem destravar o middle-market em 2026, após anos de capital represado. Cenário favorável para boutiques de sell-side.",
+    date: "2026", url: "https://www.pwc.com/gx/en/services/deals/trends.html" },
+  { origin: "GLOBAL", sectors: ["financeiro"], source: "BCG",
+    title: "BCG: M&A Outlook 2026 — expectativas altas, de novo",
+    summary: "BCG afirma que 2026 combina condições favoráveis (liquidez, gap de valuation encerrado, confiança de CEOs) para um novo ciclo de consolidação. Alerta para execução em ambiente regulatório mais complexo.",
+    date: "2026", url: "https://www.bcg.com/publications/2026/m-and-a-outlook-expectations-are-high-again" }
+];
+
+// ======================================================================
+// RENDER
+// ======================================================================
+const SECTOR_LABELS = {
+  tech: "Tech/SaaS", saude: "Saúde", varejo: "Varejo/Consumo", agro: "Agro",
+  financeiro: "Financeiro", industria: "Indústria/Energia", logistica: "Logística",
+  educacao: "Educação", energia: "Energia"
+};
+
+function renderCard(item, options = {}) {
+  const isIgc = options.igc || false;
+  const tagClass = isIgc ? 'igc' : (item.origin === 'BR' ? 'br' : 'global');
+  const tagLabel = isIgc ? 'IGC' : (item.origin === 'BR' ? 'Brasil' : 'Global');
+  const sectorsHtml = (item.sectors || []).map(s =>
+    `<span class="sector">${SECTOR_LABELS[s] || s}</span>`
+  ).join('');
+
+  return `
+    <a class="card" href="${item.url}" target="_blank" rel="noopener"
+       data-origin="${item.origin || ''}"
+       data-sectors="${(item.sectors||[]).join(',')}"
+       data-search="${(item.title + ' ' + item.summary + ' ' + item.source).toLowerCase()}">
+      <div class="card-head">
+        <span class="source">${item.source}</span>
+        <span class="tag ${tagClass}">${tagLabel}</span>
+      </div>
+      <h3>${item.title}</h3>
+      <p>${item.summary}</p>
+      <div class="card-foot">
+        <div class="sectors">${sectorsHtml}</div>
+        <span class="date">${item.date}</span>
+      </div>
+    </a>
+  `;
+}
+
+function render() {
+  document.getElementById('last-update').textContent = LAST_UPDATE;
+  document.getElementById('hero-date').textContent = HERO_DATE;
+
+  const brItems = NEWS.filter(n => n.origin === 'BR');
+  const globalItems = NEWS.filter(n => n.origin === 'GLOBAL');
+
+  document.getElementById('br-news').innerHTML = brItems.map(i => renderCard(i)).join('');
+  document.getElementById('global-news').innerHTML = globalItems.map(i => renderCard(i)).join('');
+  document.getElementById('br-count').textContent = brItems.length;
+  document.getElementById('global-count').textContent = globalItems.length;
+  document.getElementById('total-news').textContent = NEWS.length;
+}
+
+// ======================================================================
+// TABS
+// ======================================================================
+function switchTab(tabName) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
+  document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + tabName));
+  document.getElementById('clipping-filters').style.display = (tabName === 'clipping') ? 'flex' : 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+});
+
+// ======================================================================
+// FILTERS (só aplicam na aba Clipping)
+// ======================================================================
+let activeFilters = { origin: 'all', sector: 'all' };
+let searchTerm = '';
+
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const type = chip.dataset.filter;
+    document.querySelectorAll(`.chip[data-filter="${type}"]`).forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilters[type] = chip.dataset.value;
+    applyFilters();
+  });
+});
+
+document.getElementById('search').addEventListener('input', (e) => {
+  searchTerm = e.target.value.toLowerCase();
+  applyFilters();
+});
+
+function applyFilters() {
+  let visibleCount = 0;
+  document.querySelectorAll('#page-clipping .card').forEach(card => {
+    const origin = card.dataset.origin;
+    const sectors = card.dataset.sectors.split(',');
+    const searchData = card.dataset.search;
+
+    const originMatch = activeFilters.origin === 'all' || origin === activeFilters.origin;
+    const sectorMatch = activeFilters.sector === 'all' || sectors.includes(activeFilters.sector);
+    const searchMatch = !searchTerm || searchData.includes(searchTerm);
+
+    if (originMatch && sectorMatch && searchMatch) {
+      card.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  document.getElementById('empty-state').classList.toggle('hidden', visibleCount > 0);
+}
+
+render();
+</script>
+
+</body>
+</html>
